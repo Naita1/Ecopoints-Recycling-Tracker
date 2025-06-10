@@ -1,0 +1,232 @@
+/* Reset e base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+  background-color: #f4f7f5;
+}
+
+.eco-site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header fixo no topo */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2e7d32;
+  padding: 16px 32px;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo */
+.site-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Navegação no topo */
+.site-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.site-nav button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.site-nav button:hover,
+.site-nav button.active {
+  background-color: #388e3c;
+}
+
+/* Botão de logout */
+.logout-btn {
+  background-color: #d32f2f;
+  border: none;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #b71c1c;
+}
+
+/* Conteúdo principal */
+.eco-main {
+  flex: 1;
+  padding: 40px 32px;
+  background-color: #ffffff;
+}
+
+/* Títulos */
+.eco-main h2 {
+  font-size: 24px;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+.eco-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.eco-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.eco-form button {
+  padding: 10px;
+  background-color: #43a047;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.eco-form button:hover {
+  background-color: #388e3c;
+}
+
+/* Histórico */
+.eco-log {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.eco-log li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f4f1;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.eco-log span {
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+/* Lista de mercados parceiros */
+ul {
+  list-style: disc inside;
+  margin-top: 10px;
+}
+
+ul li {
+  margin-bottom: 8px;
+  color: #444;
+}
+
+/* Estilos da página perfil */
+.perfil-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7fdf7;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(67, 160, 71, 0.15);
+  text-align: center;
+  color: #2e7d32;
+}
+
+.perfil-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #388e3c;
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.perfil-info {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.progress-bar-container {
+  width: 100%;
+  max-width: 300px;
+  height: 14px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+  box-shadow: inset 0 1px 3px #b0b0b0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #43a047;
+  border-radius: 10px 0 0 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+.motivation-msg {
+  font-style: italic;
+  color: #2e7d32;
+  margin-bottom: 24px;
+  font-size: 15px;
+  user-select: none;
+}
+
+.edit-profile-btn {
+  background-color: #43a047;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.edit-profile-btn:hover {
+  background-color: #388e3c;
+}
