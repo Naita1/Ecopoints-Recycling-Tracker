@@ -200,6 +200,7 @@ export default function EcoPointsApp({ user, onLogout }) {
         {tab === "historico" && (
           <Historico
             log={log}
+            setLog={setLog}  
             item={item}
             setItem={setItem}
             onSubmit={handleSubmit}
