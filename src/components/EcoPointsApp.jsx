@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import "../styles/EcoPointsApp.css";
+import EditarPerfil from "./EditarPerfil";
+import MetasPersonalizadas from "./MetasPersonalizadas";
+import Historico from "./Historico";
+import MercadosParceiros from "./MercadosParceiros"; 
 
-function Perfil({ user, points }) {
+function Perfil({ user, points, goal, log, onEditProfile, tab, setTab }) {
   const level = Math.floor(points / 100) + 1;
   const progress = Math.min((points % 100) / 100, 1) * 100;
+  const goalProgress = Math.min(points / goal, 1) * 100;
 
   const motivations = [
     "Continue reciclando para um planeta melhor! 🌍",
@@ -22,57 +27,106 @@ function Perfil({ user, points }) {
   return (
     <section className="perfil-container">
       <div className="perfil-avatar">{initials}</div>
-      <h2>Olá, {user.username}!</h2>
-      <p className="perfil-info">
-        <strong>Nome de usuário:</strong> {user.username}
-      </p>
-      <p className="perfil-info">
-        <strong>Pontos acumulados:</strong> {points} pts
-      </p>
-      <p className="perfil-info">
-        <strong>Nível atual:</strong> {level}
-      </p>
 
-      <div
-        className="progress-bar-container"
-        aria-label="Barra de progresso de pontos"
-      >
+      <div className="perfil-content">
+        <h2>Olá, {user.username}!</h2>
+        <p className="perfil-info">
+          <strong>Pontos acumulados:</strong> {points} pts
+        </p>
+        <p className="perfil-info">
+          <strong>Nível atual:</strong> {level}
+        </p>
+        <p className="perfil-info">
+          <strong>Data de nascimento:</strong> {user.birthdate || "-"}
+        </p>
+        <p className="perfil-info">
+          <strong>Cidade:</strong> {user.city || "-"}
+        </p>
+
         <div
-          className="progress-bar-fill"
-          style={{ width: `${progress}%` }}
-          aria-valuenow={progress}
-          aria-valuemin="0"
-          aria-valuemax="100"
-        />
+          className="progress-bar-container"
+          aria-label="Barra de progresso de pontos"
+        >
+          <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
+        </div>
+
+        <h3>Meta Personalizada</h3>
+        <button
+          className={`goal-btn ${tab === "metas" ? "active" : ""}`}
+          aria-label="Ir para Metas Personalizadas"
+          onClick={() => setTab("metas")}
+        >
+          Metas
+        </button>
+
+        <p className="perfil-info">
+          Progresso: {points} / {goal} pts
+        </p>
+        <div className="progress-bar-container">
+          <div
+            className="progress-bar-fill goal-progress"
+            style={{ width: `${goalProgress}%` }}
+          />
+        </div>
+
+        <h3>Estatísticas</h3>
+        <p>Total de entregas: {log.length}</p>
+        <p>Pontos por entrega: 10 pts</p>
+
+        <p className="motivation-msg">{motivation}</p>
+
+        <button className="edit-profile-btn" onClick={onEditProfile}>
+          Editar Perfil
+        </button>
       </div>
-
-      <p className="motivation-msg">{motivation}</p>
-
-      <button
-        className="edit-profile-btn"
-        onClick={() =>
-          alert("Funcionalidade de editar perfil ainda não implementada")
-        }
-      >
-        Editar Perfil
-      </button>
     </section>
   );
 }
 
 export default function EcoPointsApp({ user, onLogout }) {
   const [tab, setTab] = useState("perfil");
+  const [userData, setUserData] = useState(user);
   const [item, setItem] = useState("");
   const [points, setPoints] = useState(0);
+  const [goal, setGoal] = useState(200);
   const [log, setLog] = useState([]);
+
+  // Estado e funções para metas personalizadas
+  const [metas, setMetas] = useState([{ id: 1, name: "Meta Inicial", goal: 200 }]);
+
+  const addMeta = (meta) => setMetas((prev) => [...prev, meta]);
+  const deleteMeta = (id) => setMetas((prev) => prev.filter((m) => m.id !== id));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!item.trim()) return;
+
+    const trimmedItem = item.trim();
+
+    if (trimmedItem.length < 3) {
+      alert("Por favor, descreva melhor o resíduo (mínimo 3 caracteres).");
+      return;
+    }
+
+    if (log.length > 0 && log[0].item.toLowerCase() === trimmedItem.toLowerCase()) {
+      alert("Você já registrou esse item por último. Registre outro resíduo.");
+      return;
+    }
+
     const earnedPoints = 10;
+    const newEntry = {
+      item: trimmedItem,
+      earnedPoints,
+      date: new Date().toISOString(),
+    };
+
     setPoints(points + earnedPoints);
-    setLog([{ item, earnedPoints, date: new Date() }, ...log]);
+    setLog([newEntry, ...log]);
     setItem("");
+  };
+
+  const handleSaveProfile = (newUserData) => {
+    setUserData(newUserData);
+    setTab("perfil");
   };
 
   return (
@@ -94,19 +148,27 @@ export default function EcoPointsApp({ user, onLogout }) {
           >
             Histórico
           </button>
-          <button
-            onClick={() => setTab("config")}
-            className={tab === "config" ? "active" : ""}
-            aria-label="Ir para Configurações"
-          >
-            Configurações
-          </button>
+
           <button
             onClick={() => setTab("mercados")}
             className={tab === "mercados" ? "active" : ""}
             aria-label="Ir para Mercados Parceiros"
           >
             Mercados
+          </button>
+          <button
+            onClick={() => setTab("metas")}
+            className={tab === "metas" ? "active" : ""}
+            aria-label="Ir para Metas Personalizadas"
+          >
+            Metas
+          </button>
+                    <button
+            onClick={() => setTab("config")}
+            className={tab === "config" ? "active" : ""}
+            aria-label="Ir para Configurações"
+          >
+            Configurações
           </button>
         </nav>
         <button className="logout-btn" onClick={onLogout} aria-label="Logout">
@@ -115,42 +177,44 @@ export default function EcoPointsApp({ user, onLogout }) {
       </header>
 
       <main className="eco-main">
-        {tab === "perfil" && <Perfil user={user} points={points} />}
-
-        {tab === "historico" && (
-          <section>
-            <h2>Histórico de Entregas</h2>
-            <form onSubmit={handleSubmit} className="eco-form">
-              <input
-                type="text"
-                value={item}
-                onChange={(e) => setItem(e.target.value)}
-                placeholder="Resíduo entregue (ex: Garrafa PET)"
-                required
-                aria-label="Resíduo entregue"
-              />
-              <button type="submit">Registrar Entrega</button>
-            </form>
-
-            <ul className="eco-log">
-              {log.length === 0 ? (
-                <p>Nenhuma entrega registrada ainda.</p>
-              ) : (
-                log.map((entry, idx) => (
-                  <li key={idx}>
-                    <div>
-                      <strong>{entry.item}</strong>
-                      <br />
-                      <small>{entry.date.toLocaleString("pt-BR")}</small>
-                    </div>
-                    <span>+{entry.earnedPoints} pts</span>
-                  </li>
-                ))
-              )}
-            </ul>
-          </section>
+        {tab === "perfil" && (
+          <Perfil
+            user={userData}
+            points={points}
+            goal={goal}
+            log={log}
+            onEditProfile={() => setTab("editarPerfil")}
+            tab={tab}
+            setTab={setTab}
+          />
         )}
 
+        {tab === "editarPerfil" && (
+          <EditarPerfil
+            user={userData}
+            onSave={handleSaveProfile}
+            onCancel={() => setTab("perfil")}
+          />
+        )}
+
+        {tab === "historico" && (
+          <Historico
+            log={log}
+            setLog={setLog}  
+            item={item}
+            setItem={setItem}
+            onSubmit={handleSubmit}
+          />
+        )}
+
+                {tab === "mercados" && <MercadosParceiros />} {/* Usando componente importado */}
+
+
+        {tab === "metas" && (
+          <MetasPersonalizadas metas={metas} points={points} onAddMeta={addMeta} onDeleteMeta={deleteMeta} />
+        )}
+
+        
         {tab === "config" && (
           <section>
             <h2>Configurações</h2>
@@ -158,23 +222,6 @@ export default function EcoPointsApp({ user, onLogout }) {
           </section>
         )}
 
-        {tab === "mercados" && (
-          <section>
-            <h2>Mercados Parceiros</h2>
-            <ul>
-              <li>
-                <strong>Mercado Verde Vida</strong> - Desconto de 10%
-              </li>
-              <li>
-                <strong>SuperEco Brasil</strong> - Desconto de 15%
-              </li>
-              <li>
-                <strong>ReciclaMarket</strong> - Ofertas especiais para
-                recicladores
-              </li>
-            </ul>
-          </section>
-        )}
       </main>
     </div>
   );
