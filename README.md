@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# EcoPoints 🌿
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Visão Geral
 
-## Available Scripts
+EcoPoints é uma aplicação web focada em incentivar a reciclagem e o consumo sustentável. Usuários podem registrar materiais recicláveis entregues, acumular pontos, definir metas pessoais de reciclagem e descobrir mercados parceiros que aceitam materiais recicláveis. Tudo isso com uma interface amigável, responsiva e suporte a tema claro e escuro.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Cadastro e Login:** Sistema simples para criar e acessar contas usando LocalStorage.
+- **Registro de Recicláveis:** Entrada rápida e prática dos tipos e quantidades de materiais entregues.
+- **Histórico Detalhado:** Lista de entregas com filtros, datas e status.
+- **Sistema de Pontos:** Pontos acumulados automaticamente com base no tipo e quantidade de recicláveis entregues.
+- **Metas Pessoais:** Criação e acompanhamento de metas com barra de progresso visual.
+- **Mercados Parceiros:** Lista de estabelecimentos que aceitam recicláveis, com avaliações, comentários e possibilidade de favoritar.
+- **Modo Escuro:** Alternância entre tema claro e escuro para melhor usabilidade.
+- **Responsividade:** Layout adaptável para celulares, tablets e desktops.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Tecnologias Utilizadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **HTML5 & CSS3:** Estrutura e estilização, com uso de Flexbox e CSS Grid para layout responsivo.
+- **JavaScript (ES6+):** Lógica do aplicativo, manipulação DOM, eventos e persistência de dados.
+- **LocalStorage:** Armazenamento local dos dados do usuário para manter histórico e preferências sem backend.
+- **Fonts & Ícones:** Fontes do Google Fonts (Ex: Inter, Segoe UI) e ícones SVG para botões e estrelas de avaliação.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Instalação e Uso
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Requisitos
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Navegador moderno (Chrome, Firefox, Edge, Safari) com suporte a LocalStorage.
+- Conexão à internet para carregar fontes e ícones externos.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Cadastro e Login
+- Cadastre um usuário com email e senha.
+- Faça login para acessar o painel de controle.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Registro de Recicláveis
+- Preencha o formulário para registrar tipos e quantidades de recicláveis.
+- Os pontos são calculados automaticamente.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Histórico
+- Visualize as entregas realizadas com status e datas.
+- Use filtros para facilitar a busca.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Metas Pessoais
+- Crie metas com nome e quantidade alvo.
+- Acompanhe o progresso com barras visuais.
 
-## Learn More
+### Mercados Parceiros
+- Navegue pelos mercados parceiros.
+- Favorite seus preferidos.
+- Leia e adicione comentários.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Tema
+- Use o botão de alternância para mudar entre tema claro e escuro.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Roadmap (Funcionalidades Futuras)
+- Integração com backend para autenticação segura e dados persistentes.
+- Sistema de notificações e lembretes para metas.
+- Gamificação: badges, níveis e recompensas.
+- Mapa interativo dos mercados parceiros.
+- Suporte multi-idioma.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Como Rodar o Projeto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Siga os passos abaixo para rodar o EcoPoints localmente na sua máquina.
 
-### Making a Progressive Web App
+### Pré-requisitos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Ter o [Node.js](https://nodejs.org/) instalado (versão 14 ou superior recomendada)
+- Um gerenciador de pacotes como [npm](https://www.npmjs.com/) (já vem com o Node.js) ou [yarn](https://yarnpkg.com/)
+## Como Rodar o Projeto
 
-### Advanced Configuration
+Siga os passos abaixo para rodar o EcoPoints localmente na sua máquina.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Pré-requisitos
 
-### Deployment
+- Ter o [Node.js](https://nodejs.org/) instalado (versão 14 ou superior recomendada)
+- Um gerenciador de pacotes como [npm](https://www.npmjs.com/) (já vem com o Node.js) ou [yarn](https://yarnpkg.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Passos para rodar
 
-### `npm run build` fails to minify
+```bash
+# Clone o repositório e acesse a pasta do projeto
+git clone https://github.com/seu-usuario/ecopoints.git
+cd ecopoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Instale as dependências
+npm install
+# ou, se usar yarn:
+# yarn install
+
+# Inicie o servidor de desenvolvimento
+npm start
+# ou, com yarn:
+# yarn start
+
