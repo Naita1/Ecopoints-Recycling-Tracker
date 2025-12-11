@@ -1,107 +1,98 @@
-# EcoPoints 🌿
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=F48FB1,FFF59D,81D4FA&height=250&section=header&text=EcoPoints&fontSize=50&fontColor=ffffff&fontAlignY=40&animation=fadeIn"/>
+</div>
 
-## Visão Geral
+<div align="center">
+  <img src="https://img.shields.io/badge/Status-Concluído-green?style=for-the-badge&logo=check&logoColor=white&color=F48FB1" alt="Status Concluído"/>
+  <img src="https://img.shields.io/badge/Front--End-HTML_%26_CSS-orange?style=for-the-badge&logo=html5&logoColor=white&color=FBC02D" alt="HTML e CSS"/>
+  <img src="https://img.shields.io/badge/JavaScript-ES6+-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=81D4FA" alt="JavaScript"/>
+</div>
 
-EcoPoints é uma aplicação web focada em incentivar a reciclagem e o consumo sustentável. Usuários podem registrar materiais recicláveis entregues, acumular pontos, definir metas pessoais de reciclagem e descobrir mercados parceiros que aceitam materiais recicláveis. Tudo isso com uma interface amigável, responsiva e suporte a tema claro e escuro.
+<p align="center">
+  Uma aplicação web focada em incentivar a reciclagem e o consumo sustentável através de gamificação e metas pessoais. 🌱
+</p>
 
----
+<br>
 
-## Funcionalidades
+## 🌿 Visão Geral
 
-- **Cadastro e Login:** Sistema simples para criar e acessar contas usando LocalStorage.
-- **Registro de Recicláveis:** Entrada rápida e prática dos tipos e quantidades de materiais entregues.
-- **Histórico Detalhado:** Lista de entregas com filtros, datas e status.
-- **Sistema de Pontos:** Pontos acumulados automaticamente com base no tipo e quantidade de recicláveis entregues.
-- **Metas Pessoais:** Criação e acompanhamento de metas com barra de progresso visual.
-- **Mercados Parceiros:** Lista de estabelecimentos que aceitam recicláveis, com avaliações, comentários e possibilidade de favoritar.
-- **Modo Escuro:** Alternância entre tema claro e escuro para melhor usabilidade.
-- **Responsividade:** Layout adaptável para celulares, tablets e desktops.
+EcoPoints é uma plataforma interativa onde usuários podem registrar materiais recicláveis entregues, acumular pontos e definir metas de sustentabilidade. Com uma interface amigável e responsiva, o projeto busca transformar o hábito da reciclagem em algo divertido e mensurável, oferecendo suporte a **Modo Escuro** e armazenamento local de dados.
 
----
+### ✨ Funcionalidades Principais
 
-## Tecnologias Utilizadas
-
-- **HTML5 & CSS3:** Estrutura e estilização, com uso de Flexbox e CSS Grid para layout responsivo.
-- **JavaScript (ES6+):** Lógica do aplicativo, manipulação DOM, eventos e persistência de dados.
-- **LocalStorage:** Armazenamento local dos dados do usuário para manter histórico e preferências sem backend.
-- **Fonts & Ícones:** Fontes do Google Fonts (Ex: Inter, Segoe UI) e ícones SVG para botões e estrelas de avaliação.
-
----
-
-## Instalação e Uso
-
-### Requisitos
-
-- Navegador moderno (Chrome, Firefox, Edge, Safari) com suporte a LocalStorage.
-- Conexão à internet para carregar fontes e ícones externos.
-
-
-### Cadastro e Login
-- Cadastre um usuário com email e senha.
-- Faça login para acessar o painel de controle.
-
-### Registro de Recicláveis
-- Preencha o formulário para registrar tipos e quantidades de recicláveis.
-- Os pontos são calculados automaticamente.
-
-### Histórico
-- Visualize as entregas realizadas com status e datas.
-- Use filtros para facilitar a busca.
-
-### Metas Pessoais
-- Crie metas com nome e quantidade alvo.
-- Acompanhe o progresso com barras visuais.
-
-### Mercados Parceiros
-- Navegue pelos mercados parceiros.
-- Favorite seus preferidos.
-- Leia e adicione comentários.
-
-### Tema
-- Use o botão de alternância para mudar entre tema claro e escuro.
+- [x] **Gamificação:** Acúmulo de pontos baseado no tipo e quantidade de material reciclado.
+- [x] **Metas Pessoais:** Criação de objetivos com barras de progresso visuais.
+- [x] **Histórico Detalhado:** Registro completo de entregas com filtros e datas.
+- [x] **Mercados Parceiros:** Lista de locais que aceitam recicláveis, com sistema de favoritar e comentar.
+- [x] **Modo Escuro:** Alternância de tema para melhor acessibilidade.
+- [x] **Responsividade:** Layout adaptável para Mobile e Desktop.
 
 ---
 
-## Roadmap (Funcionalidades Futuras)
-- Integração com backend para autenticação segura e dados persistentes.
-- Sistema de notificações e lembretes para metas.
-- Gamificação: badges, níveis e recompensas.
-- Mapa interativo dos mercados parceiros.
-- Suporte multi-idioma.
+## 🛠 Tech Stack
+
+O projeto foi construído com tecnologias Web Padrão, focando em performance e usabilidade sem dependência de frameworks pesados:
+
+* **Estrutura:** HTML5 Semântico.
+* **Estilização:** CSS3 (Flexbox & Grid), Variáveis CSS para temas.
+* **Lógica:** JavaScript (ES6+).
+* **Persistência:** LocalStorage (Simulação de banco de dados no navegador).
 
 ---
 
-## Como Rodar o Projeto
+## 🚀 Instalação e Uso
 
 Siga os passos abaixo para rodar o EcoPoints localmente na sua máquina.
 
 ### Pré-requisitos
+- Ter o [Node.js](https://nodejs.org/) instalado.
+- Um gerenciador de pacotes (npm ou yarn).
 
-- Ter o [Node.js](https://nodejs.org/) instalado (versão 14 ou superior recomendada)
-- Um gerenciador de pacotes como [npm](https://www.npmjs.com/) (já vem com o Node.js) ou [yarn](https://yarnpkg.com/)
-## Como Rodar o Projeto
+### 1. Clone o repositório
+```bash
+git clone [https://github.com/Naita1/ecopoints-recycling-tracker.git](https://github.com/Naita1/ecopoints-recycling-tracker.git)
+cd ecopoints-recycling-tracker
+```
 
-Siga os passos abaixo para rodar o EcoPoints localmente na sua máquina.
-
-### Pré-requisitos
-
-- Ter o [Node.js](https://nodejs.org/) instalado (versão 14 ou superior recomendada)
-- Um gerenciador de pacotes como [npm](https://www.npmjs.com/) (já vem com o Node.js) ou [yarn](https://yarnpkg.com/)
-
-### Passos para rodar
+### 2\. Instale as dependências
 
 ```bash
-# Clone o repositório e acesse a pasta do projeto
-git clone https://github.com/seu-usuario/ecopoints.git
-cd ecopoints
-
-# Instale as dependências
 npm install
-# ou, se usar yarn:
-# yarn install
+```
 
-# Inicie o servidor de desenvolvimento
-npm start
-# ou, com yarn:
-# yarn start
+### 3\. Inicie o Servidor
 
+```bash
+node app.js
+```
+
+O terminal exibirá: `Servidor rodando em http://localhost:3000`
+
+### 4\. Acesse
+
+Abra seu navegador e vá para: `http://localhost:3000`
+
+-----
+🗺️ Roadmap (Futuro)
+Planejo evoluir este projeto com as seguintes features:
+
+[ ] Integração com Backend real para autenticação segura.
+
+[ ] Sistema de notificações para lembrar de reciclar.
+
+[ ] Mapa interativo (Google Maps API) para localizar pontos de coleta.
+
+[ ] Ranking global de usuários.
+
+-----
+
+<div align="center"> <h3>🦸 Autora</h3> <a href="https://github.com/Naita1">  </a>
+
+
+<sub><b>Tainá Ribeiro</b></sub>
+
+
+
+<a href="https://www.linkedin.com/in/taina-cl-ribeiro" target="_blank"> <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&color=81D4FA" /> </a> <a href="mailto:tainaribeir1930@gmail.com"> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white&color=F48FB1" /> </a> </div>
+
+<div align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=81D4FA,FFF59D,F48FB1&height=100&section=footer"/> </div>
