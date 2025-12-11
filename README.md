@@ -50,7 +50,7 @@ Siga os passos abaixo para rodar o EcoPoints localmente na sua máquina.
 
 ### 1. Clone o repositório
 ```bash
-git clone [https://github.com/Naita1/ecopoints-recycling-tracker.git](https://github.com/Naita1/ecopoints-recycling-tracker.git)
+git clone https://github.com/Naita1/Ecopoints-Recycling-Tracker.git
 cd ecopoints-recycling-tracker
 ```
 
