@@ -5,6 +5,7 @@ import EditarPerfil from "./EditarPerfil";
 import MetasPersonalizadas from "./MetasPersonalizadas";
 import Historico from "./Historico";
 import MercadosParceiros from "./MercadosParceiros";
+import Configuracoes from "./Configuracoes";
 
 export default function EcoPointsApp({ user, onLogout }) {
   const storageKey = `ecodata_${user.username}`;
@@ -12,6 +13,10 @@ export default function EcoPointsApp({ user, onLogout }) {
   const [tab, setTab] = useState("perfil");
   const [userData, setUserData] = useState(user);
   const [item, setItem] = useState("");
+
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "light";
+  });
 
   const [points, setPoints] = useState(() => {
     const saved = JSON.parse(localStorage.getItem(storageKey));
@@ -37,6 +42,15 @@ export default function EcoPointsApp({ user, onLogout }) {
     localStorage.setItem(storageKey, JSON.stringify({ points, goal, log, metas }));
   }, [points, goal, log, metas, storageKey]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const handleToggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   const handleAddEntry = (newEntry) => {
     setPoints((prev) => prev + newEntry.earnedPoints);
     setLog((prev) => [newEntry, ...prev]);
@@ -50,11 +64,44 @@ export default function EcoPointsApp({ user, onLogout }) {
     setTab("perfil");
   };
 
+  const handleChangePassword = (currentPassword, newPassword, confirmPassword) => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const userIndex = users.findIndex((u) => u.username === userData.username);
+
+    if (userIndex === -1 || users[userIndex].password !== currentPassword) {
+      return { type: "error", text: "Senha atual incorreta." };
+    }
+    if (newPassword.length < 6) {
+      return { type: "error", text: "A nova senha deve ter no mínimo 6 caracteres." };
+    }
+    if (!/[A-Z]/.test(newPassword)) {
+      return { type: "error", text: "A nova senha deve conter pelo menos uma letra maiúscula." };
+    }
+    if (!/[0-9]/.test(newPassword)) {
+      return { type: "error", text: "A nova senha deve conter pelo menos um número." };
+    }
+    if (newPassword !== confirmPassword) {
+      return { type: "error", text: "As senhas não coincidem." };
+    }
+
+    users[userIndex].password = newPassword;
+    localStorage.setItem("users", JSON.stringify(users));
+    return { type: "success", text: "Senha alterada com sucesso!" };
+  };
+
+  const handleClearData = () => {
+    setPoints(0);
+    setLog([]);
+    setMetas([{ id: 1, name: "Meta Inicial", goal: 200 }]);
+    setGoal(200);
+  };
+
   const navItems = [
     { key: "perfil", label: "Perfil" },
     { key: "historico", label: "Histórico" },
     { key: "mercados", label: "Mercados" },
     { key: "metas", label: "Metas" },
+    { key: "config", label: "Configurações" },
   ];
 
   return (
@@ -116,6 +163,16 @@ export default function EcoPointsApp({ user, onLogout }) {
             points={points}
             onAddMeta={addMeta}
             onDeleteMeta={deleteMeta}
+          />
+        )}
+
+        {tab === "config" && (
+          <Configuracoes
+            theme={theme}
+            onToggleTheme={handleToggleTheme}
+            goal={goal}
+            onChangeGoal={setGoal}
+            onClearData={handleClearData}
           />
         )}
       </main>
