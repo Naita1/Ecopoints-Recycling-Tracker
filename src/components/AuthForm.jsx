@@ -11,8 +11,6 @@ export default function AuthForm({ onLogin }) {
   const [showRecoveryModal, setShowRecoveryModal] = useState(false);
   const [recoveryUsernameInput, setRecoveryUsernameInput] = useState("");
   const [recoveryMessage, setRecoveryMessage] = useState({ type: "", text: "" });
-  const [recoveredPassword, setRecoveredPassword] = useState("");
-  const [recoveryUser, setRecoveryUser] = useState("");
 
   useEffect(() => {
     const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -73,8 +71,6 @@ export default function AuthForm({ onLogin }) {
   const openRecoveryModal = () => {
     setRecoveryUsernameInput("");
     setRecoveryMessage({ type: "", text: "" });
-    setRecoveredPassword("");
-    setRecoveryUser("");
     setShowRecoveryModal(true);
   };
 
@@ -92,13 +88,12 @@ export default function AuthForm({ onLogin }) {
 
     const foundUser = users.find((u) => u.username === trimmedInput);
     if (foundUser) {
-      setRecoveredPassword(foundUser.password);
-      setRecoveryUser(foundUser.username);
-      setRecoveryMessage({ type: "success", text: "Senha recuperada com sucesso!" });
+      setRecoveryMessage({
+        type: "success",
+        text: "Usuário encontrado! Entre em contato com o suporte para redefinir sua senha.",
+      });
     } else {
       setRecoveryMessage({ type: "error", text: "Usuário não encontrado." });
-      setRecoveredPassword("");
-      setRecoveryUser("");
     }
   };
 
@@ -208,11 +203,7 @@ export default function AuthForm({ onLogin }) {
               </p>
             )}
 
-            {recoveredPassword && (
-              <p className="password-display">
-                A senha do usuário <b>{recoveryUser}</b> é: <strong>{recoveredPassword}</strong>
-              </p>
-            )}
+
           </div>
         </div>
       )}

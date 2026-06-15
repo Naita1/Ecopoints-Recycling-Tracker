@@ -107,7 +107,7 @@ export default function MercadosParceiros() {
             </div>
 
             <div>
-              <strong>Comentários:</strong>
+              <p className="comentarios-titulo">Comentários</p>
               {m.comentarios.length === 0 ? (
                 <p>Nenhum comentário ainda.</p>
               ) : (

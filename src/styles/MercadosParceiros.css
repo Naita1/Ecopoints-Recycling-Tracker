@@ -1,124 +1,164 @@
 .mercados-container {
-  max-width: 900px;
-  margin: 1rem auto;
-  padding: 0 1rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #2c3e50;
+  width: 100%;
 }
 
 .mercados-container h2 {
-  text-align: center;
-  color: #27ae60;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  font-size: 2rem;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 24px;
 }
 
 .mercados-filtro {
   display: block;
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto 2rem;
-  padding: 0.6rem 1rem;
-  border: 1.5px solid #27ae60;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+  max-width: 360px;
+  margin-bottom: 24px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.2s;
 }
 
 .mercados-filtro:focus {
   outline: none;
-  border-color: #2ecc71;
-  box-shadow: 0 0 6px #2ecc71;
+  border-color: var(--green);
 }
 
 .mercados-lista {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .mercado-item {
-  background-color: #ecf0f1;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-  margin-bottom: 1.5rem;
-  padding: 1rem 1.5rem;
-  transition: box-shadow 0.3s ease;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  transition: box-shadow 0.25s ease, transform 0.2s ease, border-color 0.2s ease;
+  animation: pageIn 0.3s ease forwards;
 }
 
 .mercado-item:hover {
-  box-shadow: 0 6px 12px rgb(0 0 0 / 0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  transform: translateY(-2px);
+  border-color: #d8d4cf;
 }
 
 .mercado-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.6rem;
+  margin-bottom: 12px;
 }
 
 .mercado-nome {
-  font-size: 1.4rem;
-  color: #27ae60;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
 }
 
 .favorito-btn {
   background: none;
   border: none;
   cursor: pointer;
-  color: #bdc3c7;
-  font-size: 1.6rem;
-  transition: color 0.3s ease;
+  color: var(--border);
+  font-size: 20px;
+  line-height: 1;
+  padding: 2px;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .favorito-btn:hover {
-  color: #f1c40f;
+  color: #c9a84c;
+  transform: scale(1.2);
 }
 
 .favorito-btn.active {
-  color: #f1c40f;
+  color: #c9a84c;
+  transform: scale(1.15);
+}
+
+.mercado-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 20px;
+  margin-bottom: 14px;
 }
 
 .mercado-info p {
-  margin: 0.3rem 0;
-  font-size: 1rem;
-  line-height: 1.3;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.mercado-info p strong {
+  color: var(--text);
+  font-weight: 500;
 }
 
 .mercado-info a {
-  color: #2980b9;
+  color: var(--green);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s;
 }
 
-.mercado-info a:hover,
-.mercado-info a:focus {
-  color: #3498db;
+.mercado-info a:hover {
+  color: var(--green-hover);
   text-decoration: underline;
 }
 
+.comentarios-titulo {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
 .comentarios-lista {
-  margin-top: 0.8rem;
-  padding-left: 1rem;
-  font-style: italic;
-  color: #34495e;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .comentarios-lista li {
-  margin-bottom: 0.4rem;
-  font-size: 0.95rem;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 6px 10px;
+  background: var(--bg);
+  border-radius: 6px;
 }
 
-@media (max-width: 600px) {
-  .mercado-header {
-    flex-direction: column;
-    align-items: flex-start;
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .mercados-filtro {
+    max-width: 100%;
   }
 
-  .favorito-btn {
-    align-self: flex-end;
-    margin-top: 0.3rem;
+  .mercado-info {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .mercado-item {
+    padding: 14px 16px;
   }
 }

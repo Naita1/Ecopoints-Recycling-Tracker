@@ -1,19 +1,29 @@
 import React, { useState } from "react";
 import "../styles/Historico.css";
 
-export default function Historico({ log, item, setItem, onSubmit, setLog }) {
+const PONTOS_COLETA = [
+  "EcoPosto Central",
+  "Ponto Verde Bairro Sul",
+  "Cooperativa Sustentável",
+  "Recicla+ Zona Leste",
+];
+
+const getIcon = (item) => {
+  const lower = item.toLowerCase();
+  if (lower.includes("papel")) return "📄";
+  if (lower.includes("plástico") || lower.includes("pet")) return "🧴";
+  if (lower.includes("vidro")) return "🍾";
+  if (lower.includes("metal") || lower.includes("lata")) return "🥫";
+  if (lower.includes("orgânico")) return "🍃";
+  return "♻️";
+};
+
+export default function Historico({ log, setLog, item, setItem, onAddEntry }) {
   const [busca, setBusca] = useState("");
   const [filtroDias, setFiltroDias] = useState("tudo");
-  const [modalIndex, setModalIndex] = useState(null);
+  const [modalEntryId, setModalEntryId] = useState(null);
   const [codigo, setCodigo] = useState("");
   const [local, setLocal] = useState("");
-
-  const pontosColeta = [
-    "EcoPosto Central",
-    "Ponto Verde Bairro Sul",
-    "Cooperativa Sustentável",
-    "Recicla+ Zona Leste"
-  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,21 +33,20 @@ export default function Historico({ log, item, setItem, onSubmit, setLog }) {
       alert("Descreva melhor o resíduo.");
       return;
     }
-
-    const ultimaEntrega = log[0];
-    if (ultimaEntrega && ultimaEntrega.item.toLowerCase() === trimmed.toLowerCase()) {
+    if (log[0]?.item.toLowerCase() === trimmed.toLowerCase()) {
       alert("Esse item já foi registrado por último.");
       return;
     }
 
-    const novaEntrega = {
+    const novaEntrada = {
+      id: Date.now(),
       item: trimmed,
       date: new Date().toISOString(),
       earnedPoints: 10,
       validado: false,
     };
 
-    setLog([novaEntrega, ...log]);
+    onAddEntry(novaEntrada);
     setItem("");
   };
 
@@ -52,41 +61,32 @@ export default function Historico({ log, item, setItem, onSubmit, setLog }) {
       alert("Selecione o local e insira um código válido (mínimo 4 caracteres).");
       return;
     }
-
-    const novaLista = [...log];
-    novaLista[modalIndex].validado = true;
-    setLog(novaLista);
-    setModalIndex(null);
+    setLog((prev) =>
+      prev.map((entry) =>
+        entry.id === modalEntryId ? { ...entry, validado: true } : entry
+      )
+    );
+    setModalEntryId(null);
     setCodigo("");
     setLocal("");
   };
 
-  const totalPontos = log.reduce((acc, l) => l.validado ? acc + l.earnedPoints : acc, 0);
-
-  const getIcon = (item) => {
-    const lower = item.toLowerCase();
-    if (lower.includes("papel")) return "📄";
-    if (lower.includes("plástico") || lower.includes("pet")) return "🧴";
-    if (lower.includes("vidro")) return "🍾";
-    if (lower.includes("metal") || lower.includes("lata")) return "🥫";
-    if (lower.includes("orgânico")) return "🍃";
-    return "♻️";
+  const closeModal = () => {
+    setModalEntryId(null);
+    setCodigo("");
+    setLocal("");
   };
+
+  const totalPontos = log.reduce((acc, l) => (l.validado ? acc + l.earnedPoints : acc), 0);
 
   const agora = new Date();
-  const filtrarPorDias = (entrada) => {
-    if (filtroDias === "tudo") return true;
-    const dias = parseInt(filtroDias);
-    const dataEntrada = new Date(entrada.date);
-    const diff = (agora - dataEntrada) / (1000 * 60 * 60 * 24);
-    return diff <= dias;
-  };
-
-  const logFiltrado = [...log]
-    .filter(filtrarPorDias)
-    .filter((entry) =>
-      entry.item.toLowerCase().includes(busca.toLowerCase())
-    )
+  const logFiltrado = log
+    .filter((entry) => {
+      if (filtroDias === "tudo") return true;
+      const dias = parseInt(filtroDias);
+      return (agora - new Date(entry.date)) / (1000 * 60 * 60 * 24) <= dias;
+    })
+    .filter((entry) => entry.item.toLowerCase().includes(busca.toLowerCase()))
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
@@ -106,7 +106,7 @@ export default function Historico({ log, item, setItem, onSubmit, setLog }) {
 
       <div className="resumo-historico">
         <p><strong>Total de entregas:</strong> {log.length}</p>
-        <p><strong>Total de pontos:</strong> {totalPontos} pts</p>
+        <p><strong>Pontos validados:</strong> {totalPontos} pts</p>
       </div>
 
       <div className="filtros-container">
@@ -116,18 +116,12 @@ export default function Historico({ log, item, setItem, onSubmit, setLog }) {
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
-
         <select value={filtroDias} onChange={(e) => setFiltroDias(e.target.value)}>
           <option value="tudo">Todos os períodos</option>
           <option value="7">Últimos 7 dias</option>
           <option value="30">Últimos 30 dias</option>
         </select>
-
-        <button
-          onClick={handleLimparHistorico}
-          className="limpar-btn"
-          type="button"
-        >
+        <button onClick={handleLimparHistorico} className="limpar-btn" type="button">
           Limpar Histórico
         </button>
       </div>
@@ -136,30 +130,21 @@ export default function Historico({ log, item, setItem, onSubmit, setLog }) {
         {logFiltrado.length === 0 ? (
           <p className="sem-entregas">Nenhuma entrega registrada com os filtros aplicados.</p>
         ) : (
-          logFiltrado.map((entry, idx) => (
-            <li key={idx}>
+          logFiltrado.map((entry) => (
+            <li key={entry.id}>
               <div>
-                <strong>{getIcon(entry.item)} {entry.item}</strong><br />
-                <small>{new Date(entry.date).toLocaleString("pt-BR")}</small><br />
-                <small style={{ color: entry.validado ? "#4caf50" : "#f57c00" }}>
+                <strong>{getIcon(entry.item)} {entry.item}</strong>
+                <br />
+                <small>{new Date(entry.date).toLocaleString("pt-BR")}</small>
+                <br />
+                <small className={entry.validado ? "status-validado" : "status-pendente"}>
                   {entry.validado ? "✔ Validado" : "⏳ Pendente"}
                 </small>
               </div>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "6px" }}>
+              <div className="entry-actions">
                 <span>+{entry.earnedPoints} pts</span>
                 {!entry.validado && (
-                  <button
-                    onClick={() => setModalIndex(idx)}
-                    style={{
-                      fontSize: "0.75rem",
-                      backgroundColor: "#388e3c",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "6px",
-                      padding: "4px 8px",
-                      cursor: "pointer",
-                    }}
-                  >
+                  <button className="validar-btn" onClick={() => setModalEntryId(entry.id)}>
                     Validar
                   </button>
                 )}
@@ -169,33 +154,20 @@ export default function Historico({ log, item, setItem, onSubmit, setLog }) {
         )}
       </ul>
 
-      {/* Modal de Validação */}
-      {modalIndex !== null && (
-        <div style={{
-          position: "fixed",
-          top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: "rgba(0,0,0,0.5)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 1000
-        }}>
-          <div style={{
-            backgroundColor: "white",
-            padding: "24px",
-            borderRadius: "10px",
-            width: "90%",
-            maxWidth: "400px",
-            boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
-            textAlign: "center"
-          }}>
+      {modalEntryId !== null && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <h3>Validação de Entrega</h3>
             <p>Escolha o local de descarte e insira o código fornecido pelo ponto de coleta.</p>
 
-            <select value={local} onChange={(e) => setLocal(e.target.value)} style={{ marginTop: 12, padding: 8, width: "100%", borderRadius: 6 }}>
+            <select
+              value={local}
+              onChange={(e) => setLocal(e.target.value)}
+              className="modal-select"
+            >
               <option value="">-- Selecione um ponto de coleta --</option>
-              {pontosColeta.map((p, i) => (
-                <option key={i} value={p}>{p}</option>
+              {PONTOS_COLETA.map((p) => (
+                <option key={p} value={p}>{p}</option>
               ))}
             </select>
 
@@ -204,38 +176,14 @@ export default function Historico({ log, item, setItem, onSubmit, setLog }) {
               placeholder="Código do ponto de coleta"
               value={codigo}
               onChange={(e) => setCodigo(e.target.value)}
-              style={{ marginTop: 12, padding: 8, width: "100%", borderRadius: 6 }}
+              className="modal-input"
             />
 
-            <div style={{ marginTop: "16px", display: "flex", gap: "10px", justifyContent: "center" }}>
-              <button
-                onClick={handleConfirmarValidacao}
-                style={{
-                  backgroundColor: "#388e3c",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 16px",
-                  borderRadius: "6px",
-                  cursor: "pointer"
-                }}
-              >
+            <div className="modal-buttons">
+              <button className="btn-confirmar" onClick={handleConfirmarValidacao}>
                 Confirmar
               </button>
-              <button
-                onClick={() => {
-                  setModalIndex(null);
-                  setCodigo("");
-                  setLocal("");
-                }}
-                style={{
-                  backgroundColor: "#aaa",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 16px",
-                  borderRadius: "6px",
-                  cursor: "pointer"
-                }}
-              >
+              <button className="btn-cancelar" onClick={closeModal}>
                 Cancelar
               </button>
             </div>
