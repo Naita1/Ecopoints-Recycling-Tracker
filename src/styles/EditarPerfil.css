@@ -1,107 +1,1 @@
-.editar-perfil-container {
-  width: 100%;
-  max-width: 480px;
-}
-
-.editar-perfil-container h2 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 24px;
-}
-
-.editar-perfil-form label {
-  display: block;
-  margin-bottom: 16px;
-  font-weight: 500;
-  font-size: 13px;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-.editar-perfil-form input[type="text"],
-.editar-perfil-form input[type="date"] {
-  display: block;
-  width: 100%;
-  padding: 10px 14px;
-  margin-top: 6px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  color: var(--text);
-  background: var(--surface);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.editar-perfil-form input:focus {
-  border-color: var(--green);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(90, 138, 106, 0.12);
-}
-
-.error-msg {
-  display: block;
-  margin-top: 5px;
-  font-size: 12px;
-  color: var(--danger);
-  font-weight: 500;
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-.editar-perfil-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 24px;
-}
-
-.btn-save {
-  flex: 1;
-  padding: 11px 0;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  border-radius: var(--radius);
-  cursor: pointer;
-  border: none;
-  background-color: var(--green);
-  color: white;
-  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-}
-
-.btn-save:hover {
-  background-color: var(--green-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(90, 138, 106, 0.25);
-}
-
-.btn-cancel {
-  flex: 1;
-  padding: 11px 0;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: 'Inter', sans-serif;
-  border-radius: var(--radius);
-  cursor: pointer;
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.btn-cancel:hover {
-  background-color: var(--bg);
-  border-color: #d0cbc5;
-}
-
-@media (max-width: 480px) {
-  .editar-perfil-container {
-    max-width: 100%;
-  }
-
-  .editar-perfil-buttons {
-    flex-direction: column-reverse;
-  }
-}
+.editar-perfil-container {  width: 100%;  max-width: 480px;}.editar-perfil-container h2 {  font-size: 20px;  font-weight: 600;  color: var(--color-text);  margin-bottom: 24px;}.editar-perfil-form label {  display: block;  margin-bottom: 16px;  font-weight: 500;  font-size: 13px;  color: var(--color-muted);  text-transform: uppercase;  letter-spacing: 0.4px;}.editar-perfil-form input[type="text"],.editar-perfil-form input[type="date"] {  display: block;  width: 100%;  padding: 10px 14px;  margin-top: 6px;  border: 1px solid var(--color-border);  border-radius: var(--radius-md);  font-size: 14px;  font-family: 'Inter', sans-serif;  color: var(--color-text);  background: var(--color-surface);  transition: border-color 0.2s ease, box-shadow 0.2s ease;}.editar-perfil-form input:focus {  border-color: var(--color-primary);  outline: none;  box-shadow: 0 0 0 3px rgba(90, 138, 106, 0.12);}.error-msg {  display: block;  margin-top: 5px;  font-size: 12px;  color: #e63946;  font-weight: 500;  text-transform: none;  letter-spacing: 0;}.editar-perfil-buttons {  display: flex;  gap: 10px;  margin-top: 24px;}.btn-save {  flex: 1;  padding: 11px 0;  font-size: 14px;  font-weight: 600;  font-family: 'Inter', sans-serif;  border-radius: var(--radius-md);  cursor: pointer;  border: none;  background-color: var(--color-primary);  color: white;  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;}.btn-save:hover {  background-color: var(--color-primary-dark);  transform: translateY(-1px);  box-shadow: 0 4px 12px rgba(90, 138, 106, 0.25);}.btn-cancel {  flex: 1;  padding: 11px 0;  font-size: 14px;  font-weight: 500;  font-family: 'Inter', sans-serif;  border-radius: var(--radius-md);  cursor: pointer;  background: none;  border: 1px solid var(--color-border);  color: var(--color-muted);  transition: background-color 0.2s ease, border-color 0.2s ease;}.btn-cancel:hover {  background-color: var(--color-bg);  border-color: #d0cbc5;}@media (max-width: 480px) {  .editar-perfil-container {    max-width: 100%;  }  .editar-perfil-buttons {    flex-direction: column-reverse;  }}

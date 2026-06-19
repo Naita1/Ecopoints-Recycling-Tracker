@@ -1,55 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
+@import './styles/designTokens.css';
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
-:root {
-  --bg: #f8f7f4;
-  --surface: #ffffff;
-  --border: #e8e4df;
-  --green: #5a8a6a;
-  --green-light: #eef4f0;
-  --green-hover: #4a7a5a;
-  --accent: #e8d5c4;
-  --accent-hover: #ddc4af;
-  --text: #3d3d3d;
-  --text-muted: #8a8a8a;
-  --danger: #c0392b;
-  --danger-hover: #a93226;
-  --radius: 10px;
-  --shadow: 0 1px 4px rgba(0,0,0,0.07);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-}
-
-[data-theme="dark"] {
-  --bg: #161b19;
-  --surface: #1e2623;
-  --border: #2a3330;
-  --green: #6fa882;
-  --green-light: #1e2e27;
-  --green-hover: #5a9470;
-  --accent: #3a2e28;
-  --accent-hover: #4a3c35;
-  --text: #e8e4df;
-  --text-muted: #7a8a84;
-  --danger: #e05c4b;
-  --danger-hover: #c94a3a;
-  --shadow: 0 1px 4px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.35);
-}
-
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 button:focus-visible {
-  outline: 2px solid var(--green);
+  outline: 2px solid var(--color-primary);
   outline-offset: 3px;
 }
