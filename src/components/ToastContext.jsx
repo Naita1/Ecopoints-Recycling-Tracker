@@ -3,6 +3,9 @@ import '../styles/Toast.css';
 export const ToastContext = createContext(null);
 export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
+  const removeToast = useCallback((id) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  }, []);
   const addToast = useCallback((message, type = 'success') => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
@@ -10,9 +13,6 @@ export const ToastProvider = ({ children }) => {
       removeToast(id);
     }, 3000);
   }, [removeToast]);
-  const removeToast = useCallback((id) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== id));
-  }, []);
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
